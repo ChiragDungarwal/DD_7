@@ -2,23 +2,156 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
   <title>Products | Dungarwal Distributors</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Additional styles for contact section on products page - matching contact page exactly */
-    .products-contact-section {
-      padding: 60px 0;
-      background: #ffffff;
+    /* ----- CRITICAL MOBILE FIXES - preserves everything else ----- */
+    * {
+      max-width: 100%;
+      box-sizing: border-box;
     }
     
-    .products-contact-section .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+    body {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
+    }
+    
+    /* Top Bar Mobile Fix */
+    .top-bar .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    
+    .brand-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    /* Navigation Mobile Fix */
+    .main-nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      color: #1e293b;
+    }
+    
+    /* Products Grid Mobile */
+    .products-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+    
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 12px;
+    }
+    
+    .product-card:active {
+      transform: scale(0.98);
+    }
+    
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .product-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    
+    .product-card h3 {
+      font-size: 1rem;
+      margin: 12px 0 6px;
+      word-break: break-word;
+    }
+    
+    .product-card p {
+      font-size: 0.85rem;
+      color: #555;
+      word-break: break-word;
+    }
+    
+    /* Category Toggles Mobile */
+    .category-toggle,
+    .subcategory-toggle {
+      width: 100%;
+      justify-content: space-between;
+      min-height: 52px;
+      touch-action: manipulation;
+    }
+    
+    .category-toggle {
+      padding: 16px 20px;
+      font-size: 1.2rem;
+    }
+    
+    .subcategory-toggle {
+      padding: 12px 16px;
+    }
+    
+    .subcategory-content {
+      padding-left: 0;
+    }
+    
+    .subcategory .subcategory {
+      margin-left: 12px;
+    }
+    
+    /* Contact Section Styles (copied exactly from contact page) */
+    .products-contact-section {
+      padding: 60px 0 40px;
+      background: #f8fafc;
+      margin-top: 40px;
     }
     
     .products-contact-section .contact-grid {
@@ -36,10 +169,15 @@
       padding: 40px;
     }
     
-    .products-contact-section .contact-info h2 {
+    .products-contact-section .contact-form {
+      padding: 40px;
+    }
+    
+    .products-contact-section .contact-info h2,
+    .products-contact-section .contact-form h2 {
       font-size: 1.8rem;
-      color: #1e293b;
       margin-bottom: 15px;
+      color: #1e293b;
       font-weight: 700;
     }
     
@@ -83,17 +221,6 @@
       margin: 0;
     }
     
-    .products-contact-section .contact-form {
-      padding: 40px;
-    }
-    
-    .products-contact-section .contact-form h2 {
-      font-size: 1.8rem;
-      color: #1e293b;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-    
     .products-contact-section .contact-form .form-group {
       margin-bottom: 20px;
     }
@@ -122,7 +249,7 @@
       resize: vertical;
     }
     
-    .products-contact-section .contact-form .btn-primary {
+    .products-contact-section .btn-primary {
       background: #2563eb;
       color: white;
       border: none;
@@ -139,24 +266,194 @@
       justify-content: center;
     }
     
-    .products-contact-section .contact-form .btn-primary:hover {
+    .products-contact-section .btn-primary:hover {
       background: #1d4ed8;
       transform: translateY(-2px);
       box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
     }
     
+    /* Page Header Mobile */
+    .page-header {
+      text-align: center;
+      padding: 40px 0 30px;
+    }
+    
+    .page-header h1 {
+      font-size: 2.2rem;
+      word-break: break-word;
+    }
+    
+    /* Images and Media */
+    img, video, iframe {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Category Content Transitions */
+    .category-content, .subcategory-content {
+      transition: all 0.2s ease;
+    }
+    
+    footer {
+      margin-top: 60px;
+    }
+    
+    /* ========== MOBILE BREAKPOINTS ========== */
     @media (max-width: 768px) {
+      .container {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      
+      .top-bar .container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .brand-logos {
+        justify-content: center;
+      }
+      
+      .brand-logos .company-name-btn {
+        padding: 6px 12px !important;
+      }
+      
+      .brand-logos img {
+        height: 24px !important;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 0;
+        background: white;
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .main-nav .container {
+        flex-wrap: wrap;
+        position: relative;
+      }
+      
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .page-header p {
+        font-size: 0.95rem;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .category-toggle {
+        font-size: 1.1rem;
+        padding: 14px 16px;
+      }
+      
+      .subcategory-toggle {
+        font-size: 0.95rem;
+        padding: 10px 14px;
+      }
+      
+      .subcategory .subcategory {
+        margin-left: 8px;
+      }
+      
+      .product-card {
+        padding: 10px;
+      }
+      
+      /* Contact Section Mobile */
+      .products-contact-section {
+        padding: 40px 0 30px;
+      }
+      
       .products-contact-section .contact-grid {
         grid-template-columns: 1fr;
         gap: 0;
+        border-radius: 20px;
       }
+      
       .products-contact-section .contact-info,
       .products-contact-section .contact-form {
         padding: 30px 25px;
       }
+      
       .products-contact-section .contact-info h2,
       .products-contact-section .contact-form h2 {
         font-size: 1.5rem;
+      }
+      
+      .products-contact-section .info-item {
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      
+      .products-contact-section .info-item i {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+      
+      .products-contact-section .info-item h4 {
+        font-size: 0.9rem;
+      }
+      
+      .products-contact-section .info-item p {
+        font-size: 0.8rem;
+      }
+      
+      .products-contact-section .contact-form input,
+      .products-contact-section .contact-form textarea {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+      
+      .products-contact-section .btn-primary {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .page-header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .category-toggle {
+        padding: 12px 14px;
+        font-size: 1rem;
+      }
+      
+      .subcategory-toggle {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .product-card h3 {
+        font-size: 0.95rem;
+      }
+      
+      .products-grid {
+        gap: 12px;
       }
     }
   </style>
@@ -219,28 +516,28 @@
           </button>
           <div class="subcategory-content">
             <div class="products-grid">
-              <div class="product-card">
+              <div class="product-card" data-product="dol-starter">
                 <div class="product-image">
                   <img src="images/dol.jpg" alt="DOL Starter">
                 </div>
                 <h3>DOL Starter</h3>
                 <p>Direct-On-Line starter for simple and reliable motor starting applications.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="fasd-starter">
                 <div class="product-image">
                   <img src="images/fasd.png" alt="FASD">
                 </div>
                 <h3>FASD</h3>
                 <p>Fully automatic star-delta starters for efficient pump and motor control.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="motor-starter-panel">
                 <div class="product-image">
                   <img src="images/three-phase-starter-panel.png" alt="Motor Starter Panel">
                 </div>
                 <h3>Motor Starter Panel</h3>
                 <p>SPS DOL and star delta starter panels</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="bk1-starter">
                 <div class="product-image">
                   <img src="images/bk1.png" alt="Bk1 Starter">
                 </div>
@@ -267,12 +564,12 @@
               </button>
               <div class="subcategory-content">
                 <div class="products-grid">
-                  <div class="product-card"><div class="product-image"><img src="images/mccb.jpg" alt="MCCB"></div><h3>MCCB</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/mcb.jpg" alt="MCB"></div><h3>MCB</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/db.jpg" alt="Distribution Box"></div><h3>MCB Distribution Box</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/sdf.jpg" alt="SDF"></div><h3>SDF</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/acb.jpg" alt="ACB"></div><h3>ACB</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/rccb.jpg" alt="RCCB"></div><h3>RCCB</h3></div>
+                  <div class="product-card" data-product="mccb"><div class="product-image"><img src="images/mccb.jpg" alt="MCCB"></div><h3>MCCB</h3></div>
+                  <div class="product-card" data-product="mcb"><div class="product-image"><img src="images/mcb.jpg" alt="MCB"></div><h3>MCB</h3></div>
+                  <div class="product-card" data-product="distribution-box"><div class="product-image"><img src="images/db.jpg" alt="Distribution Box"></div><h3>MCB Distribution Box</h3></div>
+                  <div class="product-card" data-product="sdf"><div class="product-image"><img src="images/sdf.jpg" alt="SDF"></div><h3>SDF</h3></div>
+                  <div class="product-card" data-product="acb"><div class="product-image"><img src="images/acb.jpg" alt="ACB"></div><h3>ACB</h3></div>
+                  <div class="product-card" data-product="rccb"><div class="product-image"><img src="images/rccb.jpg" alt="RCCB"></div><h3>RCCB</h3></div>
                 </div>
               </div>
             </div>
@@ -285,16 +582,16 @@
               </button>
               <div class="subcategory-content">
                 <div class="products-grid">
-                  <div class="product-card"><div class="product-image"><img src="images/minicontactor.jpg" alt="Mini Contactor"></div><h3>Mini Contactors</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/contactor.jpg" alt="Contactor"></div><h3>Contactors</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/special.jpg" alt="Special Contactor"></div><h3>Special Purpose Contactors</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/relay.jpg" alt="Control Relay"></div><h3>Control Relay</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/dccontactor.jpg" alt="DC Contactor"></div><h3>DC Contactors</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/overload.jpg" alt="Overload Relay"></div><h3>Overload Relays</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/mpcb.jpg" alt="MPCB"></div><h3>MPCB</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/EOR.jpg" alt="Electronic Overload Relay"></div><h3>Electronic Overload Relay</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/apfc.jpg" alt="Automatic Power Factor Correction Relay"></div><h3>APFC Relay</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/capacitor.jpg" alt="Power Capacitor"></div><h3>Power Capacitor</h3></div>
+                  <div class="product-card" data-product="mini-contactor"><div class="product-image"><img src="images/minicontactor.jpg" alt="Mini Contactor"></div><h3>Mini Contactors</h3></div>
+                  <div class="product-card" data-product="contactor"><div class="product-image"><img src="images/contactor.jpg" alt="Contactor"></div><h3>Contactors</h3></div>
+                  <div class="product-card" data-product="special-contactor"><div class="product-image"><img src="images/special.jpg" alt="Special Contactor"></div><h3>Special Purpose Contactors</h3></div>
+                  <div class="product-card" data-product="control-relay"><div class="product-image"><img src="images/relay.jpg" alt="Control Relay"></div><h3>Control Relay</h3></div>
+                  <div class="product-card" data-product="dc-contactor"><div class="product-image"><img src="images/dccontactor.jpg" alt="DC Contactor"></div><h3>DC Contactors</h3></div>
+                  <div class="product-card" data-product="overload-relay"><div class="product-image"><img src="images/overload.jpg" alt="Overload Relay"></div><h3>Overload Relays</h3></div>
+                  <div class="product-card" data-product="mpcb"><div class="product-image"><img src="images/mpcb.jpg" alt="MPCB"></div><h3>MPCB</h3></div>
+                  <div class="product-card" data-product="electronic-overload"><div class="product-image"><img src="images/EOR.jpg" alt="Electronic Overload Relay"></div><h3>Electronic Overload Relay</h3></div>
+                  <div class="product-card" data-product="apfc-relay"><div class="product-image"><img src="images/apfc.jpg" alt="Automatic Power Factor Correction Relay"></div><h3>APFC Relay</h3></div>
+                  <div class="product-card" data-product="power-capacitor"><div class="product-image"><img src="images/capacitor.jpg" alt="Power Capacitor"></div><h3>Power Capacitor</h3></div>
                 </div>
               </div>
             </div>
@@ -307,15 +604,15 @@
               </button>
               <div class="subcategory-content">
                 <div class="products-grid">
-                  <div class="product-card"><div class="product-image"><img src="images/control.jpg" alt="Control Devices"></div><h3>Control & Signalling Devices</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/footswitch.jpg" alt="Foot Switch"></div><h3>Foot Switch</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/acbrake.jpg" alt="AC Brake"></div><h3>AC Solenoid & AC Brakes</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/dcbrake.jpg" alt="DC Brake"></div><h3>DC Brakes</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/timer.jpg" alt="Timer"></div><h3>Pneumatic Timers</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/wire.jpg" alt="Wire"></div><h3>Wires & Cables</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/socket.jpg" alt="Socket"></div><h3>Industrial Plug & Socket</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/limit.jpg" alt="Limit Switch"></div><h3>Limit Switch</h3></div>
-                  <div class="product-card"><div class="product-image"><img src="images/ps.jpg" alt="Proximity Sensor"></div><h3>Proximity Sensor</h3></div>
+                  <div class="product-card" data-product="control-devices"><div class="product-image"><img src="images/control.jpg" alt="Control Devices"></div><h3>Control & Signalling Devices</h3></div>
+                  <div class="product-card" data-product="foot-switch"><div class="product-image"><img src="images/footswitch.jpg" alt="Foot Switch"></div><h3>Foot Switch</h3></div>
+                  <div class="product-card" data-product="ac-brake"><div class="product-image"><img src="images/acbrake.jpg" alt="AC Brake"></div><h3>AC Solenoid & AC Brakes</h3></div>
+                  <div class="product-card" data-product="dc-brake"><div class="product-image"><img src="images/dcbrake.jpg" alt="DC Brake"></div><h3>DC Brakes</h3></div>
+                  <div class="product-card" data-product="timer"><div class="product-image"><img src="images/timer.jpg" alt="Timer"></div><h3>Pneumatic Timers</h3></div>
+                  <div class="product-card" data-product="wire"><div class="product-image"><img src="images/wire.jpg" alt="Wire"></div><h3>Wires & Cables</h3></div>
+                  <div class="product-card" data-product="socket"><div class="product-image"><img src="images/socket.jpg" alt="Socket"></div><h3>Industrial Plug & Socket</h3></div>
+                  <div class="product-card" data-product="limit-switch"><div class="product-image"><img src="images/limit.jpg" alt="Limit Switch"></div><h3>Limit Switch</h3></div>
+                  <div class="product-card" data-product="proximity-sensor"><div class="product-image"><img src="images/ps.jpg" alt="Proximity Sensor"></div><h3>Proximity Sensor</h3></div>
                 </div>
               </div>
             </div>
@@ -331,7 +628,7 @@
           </button>
           <div class="subcategory-content">
             <div class="products-grid">
-              <div class="product-card">
+              <div class="product-card" data-product="enclosures">
                 <div class="product-image">
                   <img src="images/enclosure.jpg" alt="Electrical Enclosures">
                 </div>
@@ -360,28 +657,28 @@
           </button>
           <div class="subcategory-content">
             <div class="products-grid">
-              <div class="product-card">
+              <div class="product-card" data-product="ats">
                 <div class="product-image">
                   <img src="images/ats.jpg" alt="ATS">
                 </div>
                 <h3>Automatic Transfer Switch</h3>
                 <p>Seamless switching between mains and generator.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="changeover">
                 <div class="product-image">
                   <img src="images/changeover.jpg" alt="Changeover">
                 </div>
                 <h3>Manual Changeover Switch</h3>
                 <p>Reliable manual power switching solution.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="switch-disconnector">
                 <div class="product-image">
                   <img src="images/switch.jpg" alt="Switch Disconnector">
                 </div>
                 <h3>Switch Disconnectors</h3>
                 <p>Safe isolation and switching devices.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="fuse-switch">
                 <div class="product-image">
                   <img src="images/fuse.jpg" alt="Fuse Switch">
                 </div>
@@ -400,28 +697,28 @@
           </button>
           <div class="subcategory-content">
             <div class="products-grid">
-              <div class="product-card">
+              <div class="product-card" data-product="energy-meter">
                 <div class="product-image">
                   <img src="images/meter.jpg" alt="Energy Meter">
                 </div>
                 <h3>Energy Meters</h3>
                 <p>Accurate measurement of electrical consumption.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="power-analyzer">
                 <div class="product-image">
                   <img src="images/analyzer.jpg" alt="Power Analyzer">
                 </div>
                 <h3>Power Analyzers</h3>
                 <p>Advanced monitoring of electrical parameters.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="monitoring-system">
                 <div class="product-image">
                   <img src="images/monitor.jpg" alt="Monitoring System">
                 </div>
                 <h3>Monitoring Systems</h3>
                 <p>Real-time tracking of power performance.</p>
               </div>
-              <div class="product-card">
+              <div class="product-card" data-product="power-controller">
                 <div class="product-image">
                   <img src="images/controller.jpg" alt="Controller">
                 </div>
@@ -435,10 +732,10 @@
       </div>
     </div>
 
-  </div> <!-- Closing container for products-section -->
+  </div>
 </section>
 
-<!-- ========== CONTACT SECTION ADDED EXACTLY AS ON CONTACT PAGE ========== -->
+<!-- Contact Section -->
 <section class="products-contact-section">
   <div class="container">
     <div class="contact-grid">
@@ -482,17 +779,17 @@
       
       <div class="contact-form">
         <h2>Send Inquiry</h2>
-        <form id="productsInquiryForm">
+        <form id="inquiryFormProducts">
           <div class="form-group">
-            <input type="text" id="productsName" placeholder="Your Name" required>
+            <input type="text" id="nameProducts" placeholder="Your Name" required>
           </div>
           <div class="form-group">
-            <input type="text" id="productsPhone" placeholder="Phone Number" required>
+            <input type="text" id="phoneProducts" placeholder="Phone Number" required>
           </div>
           <div class="form-group">
-            <textarea id="productsMessage" placeholder="Your Requirement" required></textarea>
+            <textarea id="messageProducts" placeholder="Your Requirement" required></textarea>
           </div>
-          <button type="button" class="btn-primary" onclick="sendProductsWhatsApp()">
+          <button type="button" class="btn-primary" onclick="sendToWhatsAppProducts()">
             <i class="fab fa-whatsapp"></i> Send on WhatsApp
           </button>
         </form>
@@ -500,7 +797,6 @@
     </div>
   </div>
 </section>
-<!-- ========== END OF CONTACT SECTION ========== -->
 
 <!-- Footer -->
 <footer>
@@ -514,15 +810,17 @@
     .then(response => response.text())
     .then(data => {
       document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(() => {
+      document.getElementById('footer-container').innerHTML = '<p>© Dungarwal Distributors. All rights reserved.</p>';
     });
-</script>
 
-<script>
   // Product URL mapping
   const productUrls = {
     'dol-starter': 'dol-starter.html',
     'fasd-starter': 'fasd-starter.html',
     'motor-starter-panel': 'motor-starter-panel.html',
+    'bk1-starter': 'bk1-starter.html',
     'single-phase-pump-panel': 'vfd-panel.html',
     'mccb': 'mccb.html',
     'mcb': 'mcb.html',
@@ -560,18 +858,15 @@
     'power-controller': 'power-controller.html'
   };
 
-  // Enable scroll restoration
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
 
-  // Save scroll position before leaving
   window.addEventListener('beforeunload', () => {
     sessionStorage.setItem('products_scroll_position', window.scrollY);
     
-    // Save expanded categories state
     const expandedCategories = [];
-    document.querySelectorAll('.category-content.active').forEach((content, index) => {
+    document.querySelectorAll('.category-content.active').forEach((content) => {
       const categoryBtn = content.previousElementSibling;
       if (categoryBtn && categoryBtn.classList.contains('category-toggle')) {
         const categoryText = categoryBtn.querySelector('span').innerText;
@@ -580,7 +875,6 @@
     });
     sessionStorage.setItem('products_expanded_categories', JSON.stringify(expandedCategories));
     
-    // Save expanded subcategories state
     const expandedSubcategories = [];
     document.querySelectorAll('.subcategory-content.active').forEach((content) => {
       const subcategoryBtn = content.previousElementSibling;
@@ -592,9 +886,7 @@
     sessionStorage.setItem('products_expanded_subcategories', JSON.stringify(expandedSubcategories));
   });
 
-  // Restore scroll position and expanded states on load
   window.addEventListener('load', () => {
-    // Restore scroll position
     const savedScroll = sessionStorage.getItem('products_scroll_position');
     if (savedScroll) {
       setTimeout(() => {
@@ -602,7 +894,6 @@
       }, 100);
     }
     
-    // Restore expanded categories
     const savedCategories = sessionStorage.getItem('products_expanded_categories');
     if (savedCategories) {
       const categoriesToExpand = JSON.parse(savedCategories);
@@ -614,7 +905,6 @@
       });
     }
     
-    // Restore expanded subcategories
     const savedSubcategories = sessionStorage.getItem('products_expanded_subcategories');
     if (savedSubcategories) {
       const subcategoriesToExpand = JSON.parse(savedSubcategories);
@@ -627,7 +917,6 @@
     }
   });
 
-  // Category toggle functionality
   document.querySelectorAll('.category-toggle').forEach(button => {
     button.addEventListener('click', () => {
       const content = button.nextElementSibling;
@@ -636,7 +925,6 @@
     });
   });
 
-  // Subcategory toggle functionality
   document.querySelectorAll('.subcategory-toggle').forEach(button => {
     button.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -646,7 +934,6 @@
     });
   });
 
-  // Make product cards clickable - saves scroll position before navigating
   document.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
@@ -655,10 +942,8 @@
       const productUrl = productUrls[productKey];
       
       if (productUrl) {
-        // Save current scroll position before navigating
         sessionStorage.setItem('products_scroll_position', window.scrollY);
         
-        // Save expanded categories state
         const expandedCategories = [];
         document.querySelectorAll('.category-content.active').forEach((content) => {
           const categoryBtn = content.previousElementSibling;
@@ -669,7 +954,6 @@
         });
         sessionStorage.setItem('products_expanded_categories', JSON.stringify(expandedCategories));
         
-        // Save expanded subcategories state
         const expandedSubcategories = [];
         document.querySelectorAll('.subcategory-content.active').forEach((content) => {
           const subcategoryBtn = content.previousElementSibling;
@@ -680,7 +964,6 @@
         });
         sessionStorage.setItem('products_expanded_subcategories', JSON.stringify(expandedSubcategories));
         
-        // Navigate to product page
         window.location.href = productUrl;
       } else {
         console.warn('No URL mapping found for product:', productKey);
@@ -688,18 +971,32 @@
     });
   });
 
-  // WhatsApp inquiry function for products page (identical to contact page)
-  function sendProductsWhatsApp() {
-    var name = document.getElementById('productsName').value.trim();
-    var phone = document.getElementById('productsPhone').value.trim();
-    var message = document.getElementById('productsMessage').value.trim();
+  // Mobile navigation toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+
+  // WhatsApp function
+  function sendToWhatsAppProducts() {
+    var name = document.getElementById('nameProducts').value.trim();
+    var phone = document.getElementById('phoneProducts').value.trim();
+    var message = document.getElementById('messageProducts').value.trim();
     
     if (name === "" || phone === "" || message === "") {
       alert("Please fill all fields before sending.");
       return;
     }
     
-    // Validate phone number (basic check)
     if (phone.length < 10) {
       alert("Please enter a valid phone number.");
       return;
@@ -710,8 +1007,7 @@
                           "Phone: " + encodeURIComponent(phone) + "%0A" +
                           "Requirement: " + encodeURIComponent(message);
     
-    // Using the business phone number from contact info
-    var whatsappNumber = "919950136568"; // +91 9950136568 without plus
+    var whatsappNumber = "919950136568";
     var whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + whatsappMessage;
     
     window.open(whatsappUrl, '_blank');
@@ -720,3 +1016,4 @@
 
 </body>
 </html>
+
