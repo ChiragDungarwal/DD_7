@@ -42,59 +42,128 @@
     </div>
   </nav>
 
-  <!-- Hero Section with Slideshow -->
-  <section class="hero">
-    <div class="slideshow-container">
-      <div class="slideshow">
-        <div class="slide active">
-          <div class="slide-bg" style="background-image: url('images/slide1.jpg');"></div>
-          <div class="slide-overlay"></div>
-          <div class="slide-text slide-text-right">
+<!-- Hero Section with Slideshow -->
+<section class="hero">
 
-            <h2>Quality Electrical Products</h2>
-            <p>Premium range </p>
-          </div>
+  <div class="slideshow-container">
+
+    <div class="slideshow">
+
+      <!-- Slide 1 -->
+      <div class="slide active">
+        <div class="slide-bg"
+             style="background-image:url('images/slide1.jpg');">
         </div>
-        <div class="slide">
-          <div class="slide-bg" style="background-image: url('images/slide2.jpg');"></div>
-          <div class="slide-overlay"></div>
-          <div class="slide-text slide-text-right">
-            <h2>BCH Electric Authorized Dealer</h2>
-            <p>Genuine MCCB, MCB, Contactors and more</p>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="slide-bg" style="background-image: url('images/slide3.jpg');"></div>
-          <div class="slide-overlay"></div>
-          <div class="slide-text slide-text-right">
-            <h2>Socomec Partner</h2>
-            <p>High-quality power control and safety solutions</p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-content">
-        <h1 class="fade-up">Industrial Electrical Solutions</h1>
-        <p class="fade-up delay-1">Authorized dealer of BCH Electric & Socomec products. Quality electrical components
-          for industrial applications.</p>
-        <a href="catalog.pdf" class="btn-primary fade-up delay-2" download>
-          <i class="fas fa-download"></i> Download Catalogue
-        </a>
-      </div>
-      <div class="image-container">
-        <!-- Your content here -->
-        <img src="images/background.jpg" alt="Background" class="container-bg">
-        <div class="container-content">
-          <!-- Your text or other elements go here -->
+
+        <div class="slide-text">
+          <span class="slide-tag">
+            PREMIUM QUALITY
+          </span>
+
+          <h2>Quality Electrical Products</h2>
+
+          <p>
+            Reliable industrial electrical components designed
+            for safety, durability and long service life.
+          </p>
+
+          <a href="products.html" class="slide-btn">
+            Explore Products
+          </a>
         </div>
       </div>
-      <button class="slide-prev"><i class="fas fa-chevron-left"></i></button>
-      <button class="slide-next"><i class="fas fa-chevron-right"></i></button>
-      <div class="slide-dots"></div>
+
+      <!-- Slide 2 -->
+      <div class="slide">
+        <div class="slide-bg"
+             style="background-image:url('images/slide2.jpg');">
+        </div>
+
+        <div class="slide-text">
+
+          <span class="slide-tag">
+            AUTHORIZED DEALER
+          </span>
+
+          <h2>BCH Electric</h2>
+
+          <p>
+            Complete range of MCCBs, MCBs, Contactors,
+            Relays and Industrial Controlgear.
+          </p>
+
+          <a href="products.html" class="slide-btn">
+            View BCH Products
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide">
+
+        <div class="slide-bg"
+             style="background-image:url('images/slide3.jpg');">
+        </div>
+
+        <div class="slide-text">
+
+          <span class="slide-tag">
+            POWER SOLUTIONS
+          </span>
+
+          <h2>Socomec Partner</h2>
+
+          <p>
+            Advanced power switching, monitoring and
+            protection systems for critical applications.
+          </p>
+
+          <a href="products.html" class="slide-btn">
+            View Socomec Products
+          </a>
+
+        </div>
+      </div>
 
     </div>
 
-  </section>
+    <!-- Navigation -->
+    <button class="slide-prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
 
+    <button class="slide-next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Dots -->
+    <div class="slide-dots"></div>
+
+    <!-- Bottom Brand Strip -->
+    <div class="hero-brand-strip">
+
+      <div class="brand-item">
+        <img src="images/bch-logo.png" alt="BCH">
+      </div>
+
+      <div class="brand-divider"></div>
+
+      <div class="brand-item">
+        <img src="images/socomec-logo.png" alt="Socomec">
+      </div>
+
+      <div class="brand-divider"></div>
+
+      <div class="brand-text">
+        Trusted Industrial Electrical Distributor
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
   <!-- About Section -->
   <section class="about">
     <div class="container">
